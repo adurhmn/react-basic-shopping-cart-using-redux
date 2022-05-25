@@ -6,12 +6,9 @@ import BodyWrapper from "./components/UI/BodyWrapper";
 import FoodItems from "./components/Food/FoodItems";
 import Modal from "./components/Cart/Modal";
 import ModalContent from "./components/Cart/ModalContent";
-import { useDispatch, useSelector } from "react-redux";
-import { menuActions } from "./components/store/sliceFoodMenu";
 
 const App = function () {
-  const dispatch = useDispatch();
-
+  const [foodData, setFoodData] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [dataFetchFailed, setDataFetchFailed] = useState(false);
 
@@ -20,9 +17,7 @@ const App = function () {
       "https://react-project-7ced2-default-rtdb.firebaseio.com/meal-data.json"
     )
       .then((res) => res.json())
-      .then((data) =>
-        dispatch(menuActions.updateMenu(data["-N1mh71Dhy5vFrQyecZh"]))
-      )
+      .then((data) => setFoodData(data["-N1mh71Dhy5vFrQyecZh"]))
       .catch(() => setDataFetchFailed(true));
   }, []);
 
@@ -35,7 +30,7 @@ const App = function () {
         </Modal>
       )}
       <BodyWrapper>
-        <FoodItems dataFetched={!dataFetchFailed} />
+        <FoodItems foodData={foodData} dataFetched={!dataFetchFailed} />
       </BodyWrapper>
       <Footer />
     </React.Fragment>

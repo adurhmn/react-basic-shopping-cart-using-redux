@@ -1,19 +1,19 @@
 import React from "react";
 import styles from "./CartItem.module.css";
 import btnStyles from "../../assets/css/button.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../store/sliceFoodCart";
 
 const CartItem = function (props) {
-  const foodData = useSelector((state) => state.menu);
   const dispatch = useDispatch();
+  const { name, price, count, id } = props.itemInfo;
 
   return (
     <li className={styles.cartItem}>
       <div>
-        <h2>{props.itemInfo.name}</h2>
-        <span className={styles.price}>₹{props.itemInfo.price}</span>
-        <span className={styles.count}>x{props.itemInfo.count}</span>
+        <h2>{name}</h2>
+        <span className={styles.price}>₹{price}</span>
+        <span className={styles.count}>x{count}</span>
       </div>
       <div>
         <button
@@ -21,8 +21,10 @@ const CartItem = function (props) {
           onClick={() => {
             dispatch(
               cartActions.removeItem({
-                id: props.itemInfo.id,
-                count: 1,
+                id,
+                removeCount: 1,
+                price,
+                itemCount: count,
               })
             );
           }}
@@ -34,9 +36,12 @@ const CartItem = function (props) {
           onClick={() => {
             dispatch(
               cartActions.addItem({
-                id: props.itemInfo.id,
-                count: 1,
-                foodData,
+                addCount: 1,
+                foodData: {
+                  name,
+                  price,
+                  id,
+                },
               })
             );
           }}

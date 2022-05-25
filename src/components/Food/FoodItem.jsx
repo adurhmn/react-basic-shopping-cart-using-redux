@@ -1,12 +1,11 @@
 import React, { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { cartActions } from "../store/sliceFoodCart";
 import styles from "./FoodItem.module.css";
 
 export default function FoodItem(props) {
   const { name, desc, price, id } = props.foodData;
   const countInput = useRef();
-  const foodData = useSelector((state) => state.menu);
   const dispatch = useDispatch();
 
   return (
@@ -31,9 +30,12 @@ export default function FoodItem(props) {
           onClick={() => {
             dispatch(
               cartActions.addItem({
-                id,
-                count: +countInput.current.value,
-                foodData,
+                addCount: +countInput.current.value,
+                foodData: {
+                  name,
+                  price,
+                  id,
+                },
               })
             );
           }}

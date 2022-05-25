@@ -9,39 +9,40 @@ const foodCart = createSlice({
   },
   reducers: {
     removeItem: (state, action) => {
-      const { id, count } = action.payload;
-      const itemPrice =
-        state.cartItems.find((item) => item.id === id).price * count;
+      const { id, removeCount, price, itemCount } = action.payload;
 
       // if it is the last count, remove food from cart
-      if (state.cartItems.find((item) => item.id === id).count === count) {
+      if (itemCount === removeCount) {
         state.cartItems = state.cartItems.filter((item) => item.id !== id);
       } else {
         // else, reduce food count
-        state.cartItems.find((item) => item.id === id).count -= count;
+        state.cartItems.find((item) => item.id === id).count -= removeCount;
       }
 
-      state.cartTotalCount -= count;
-      state.cartTotalPrice -= itemPrice;
+      state.cartTotalCount -= removeCount;
+      state.cartTotalPrice -= price * removeCount;
     },
 
     addItem: (state, action) => {
-      const { id, count, foodData } = action.payload;
-      const itemPrice = foodData.find((item) => item.id === id).price * count;
+      const {
+        addCount,
+        foodData,
+        foodData: { id, price },
+      } = action.payload;
 
       // if food is in cart, increase count
       if (state.cartItems.some((item) => item.id === id)) {
-        state.cartItems.find((item) => item.id === id).count += count;
+        state.cartItems.find((item) => item.id === id).count += addCount;
       } else {
         // else, add food
         state.cartItems.push({
-          ...foodData.find((item) => item.id === id),
-          count: count,
+          ...foodData,
+          count: addCount,
         });
       }
 
-      state.cartTotalCount += count;
-      state.cartTotalPrice += itemPrice;
+      state.cartTotalCount += addCount;
+      state.cartTotalPrice += price * addCount;
     },
   },
 });
