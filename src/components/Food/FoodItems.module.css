@@ -1,0 +1,9 @@
+.foodItems {
+  background-color: white;
+  padding: 2rem;
+  list-style: none;
+  min-width: 25rem;
+  width: 75%;
+  max-width: 90rem;
+  border-radius: var(--container-radius);
+}

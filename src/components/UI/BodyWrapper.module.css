@@ -1,0 +1,16 @@
+.bodyWrapper {
+  padding: 12rem 2rem;
+  margin-top: 100px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  align-items: center;
+}
+
+@media only screen and (max-width: 650px) {
+  .bodyWrapper {
+    padding: 10rem 2rem;
+    margin-top: 154px;
+  }
+}
