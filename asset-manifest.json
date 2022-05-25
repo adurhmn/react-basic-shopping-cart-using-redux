@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/react-basic-shopping-cart-using-redux/static/css/main.adedb76e.css",
+    "main.js": "/react-basic-shopping-cart-using-redux/static/js/main.7c930579.js",
+    "static/media/background.jpg": "/react-basic-shopping-cart-using-redux/static/media/background.3a6e5c2ab87cacea0514.jpg",
+    "index.html": "/react-basic-shopping-cart-using-redux/index.html",
+    "main.adedb76e.css.map": "/react-basic-shopping-cart-using-redux/static/css/main.adedb76e.css.map",
+    "main.7c930579.js.map": "/react-basic-shopping-cart-using-redux/static/js/main.7c930579.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.adedb76e.css",
+    "static/js/main.7c930579.js"
+  ]
+}
